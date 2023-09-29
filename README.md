@@ -12,18 +12,11 @@ number for the night), the winnings/losses in dollar amount for each player at t
 hand played for the event (with the associated player), the time of each game (to keep track of winnings/hour), 
 along with all-of-time statistics to look at how each player has done since they first started playing.
 
-A *bulleted* list:
-- item 1
-- item 2
-- item 3
 
-An example of text with **bold** and *italic* fonts.  
-
-*What will the application do?*
-
-
-*Who will use it?*
-
-
-*Why is this project of interest to you?*
+## User Stories:
+- As a user, I want to be able to add a new poker event to my total collection of poker events
+- As a user, I want to be able to view the list of poker events in my poker collection
+- As a user, I want to be able to remove a poker event from my poker collection
+- As a user, I want to be able to select a poker event from my collection and list the players that played in that 
+poker event and their associated statistics, including buy-ins, profit/loss counts, and earnings/hour
 
