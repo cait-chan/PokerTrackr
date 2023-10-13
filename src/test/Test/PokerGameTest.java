@@ -39,5 +39,14 @@ class PokerGameTest {
         assertEquals(player2, testPokerGame.getPlayers().get(1));
     }
 
-
+    @Test
+    void testRemovePlayer() {
+        testPokerGame.addPlayer(player1);
+        testPokerGame.addBuyIn(20);
+        testPokerGame.addCashOut(20);
+        testPokerGame.removePlayer(player1, 20, 20);
+        assertEquals(0, testPokerGame.getPlayers().size());
+        assertEquals(0, testPokerGame.getBuyIns().size());
+        assertEquals(0, testPokerGame.getCashOuts().size());
+    }
 }

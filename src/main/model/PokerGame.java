@@ -33,6 +33,16 @@ public class PokerGame {
         this.players.remove(player);
         player.decreaseTotalBuyIns(buyIn);
         player.decreaseTotalCashOuts(cashOut);
+        for (int i = 0; i < getBuyIns().size(); i++) {
+            if (getBuyIns().get(i) == buyIn) {
+                this.buyIns.remove(getBuyIns().get(i));
+            }
+        }
+        for (int i = 0; i < getCashOuts().size(); i++) {
+            if (getCashOuts().get(i) == cashOut) {
+                this.cashOuts.remove(getCashOuts().get(i));
+            }
+        }
     }
 
     // REQUIRES: amount >= 0
