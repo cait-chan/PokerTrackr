@@ -34,7 +34,8 @@ class PlayerTest {
         testPlayer.increaseTotalBuyIns(20);
         testPlayer.increaseTotalBuyIns(50);
         testPlayer.increaseTotalBuyIns(100);
-        assertEquals(170, testPlayer.getTotalBuyIns());
+        testPlayer.decreaseTotalBuyIns(30);
+        assertEquals(140, testPlayer.getTotalBuyIns());
     }
 
     @Test
@@ -48,6 +49,7 @@ class PlayerTest {
         testPlayer.increaseTotalCashOuts(30);
         testPlayer.increaseTotalCashOuts(60);
         testPlayer.increaseTotalCashOuts(90);
-        assertEquals(180, testPlayer.getTotalCashOuts());
+        testPlayer.decreaseTotalCashOuts(20);
+        assertEquals(160, testPlayer.getTotalCashOuts());
     }
 }
