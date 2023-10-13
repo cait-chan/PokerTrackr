@@ -14,9 +14,12 @@ along with all-of-time statistics to look at how each player has done since they
 
 
 ## User Stories:
+- As a user, I want to be able to create a new player with a name
+- As a user, I want to be able to add a player to an existing poker game
+- As a user, I want to be able to remove a player from an existing poker game
 - As a user, I want to be able to add a new poker event to my total collection of poker events
 - As a user, I want to be able to view the list of poker events in my poker collection
 - As a user, I want to be able to remove a poker event from my poker collection
-- As a user, I want to be able to select a poker event from my collection and list the players that played in that 
+- As a user, I want to be able to select a poker event from my collection and view list the players that played in that 
 poker event and their associated statistics, including buy-ins, profit/loss counts, and earnings/hour
 
