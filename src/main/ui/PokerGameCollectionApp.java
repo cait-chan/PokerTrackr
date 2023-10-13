@@ -37,6 +37,7 @@ public class PokerGameCollectionApp {
         System.out.println("\nHave a good day!");
     }
 
+    // EFFECTS: processes user input command
     private void processCommand(String command) {
         if (command.equals("n")) {
             createNewPokerGame();
@@ -82,6 +83,9 @@ public class PokerGameCollectionApp {
         }
     }
 
+    // REQUIRES: pokerGameCollection.size() > 0
+    // MODIFIES: this
+    // EFFECTS: adds players to new poker game
     private void newGameAddPlayers(PokerGame pokerGame) {
         boolean addingPlayers = true;
         String command = null;
@@ -105,16 +109,19 @@ public class PokerGameCollectionApp {
         }
     }
 
+    // REQUIRES: pokerGameCollection.size() > 0
+    // MODIFIES: this
+    // EFFECTS: prompts user for player buy-in and cash-out values
     private void newGameAddBuyInsAndCashOuts(PokerGame pokerGame) {
         for (Player player : pokerGame.getPlayers()) {                //list players and prompt user for buy-ins
             System.out.print("Please enter buy-in amount for player (CAD dollars): ");
             int buyInAmount = Integer.parseInt(input.next());
             pokerGame.addBuyIn(buyInAmount);
         }
-        for (int i = 0; i < pokerGame.getPlayers().size(); i++) {       //list players and buy-ins, prompt user
-            System.out.println(pokerGame.getPlayers().get(i).getName()); //for cash-outs
-            System.out.println(pokerGame.getBuyIns().get(i));
-            System.out.print("Please enter cash-out amount for player (CAD dollars): ");
+        for (int i = 0; i < pokerGame.getPlayers().size(); i++) {                //list players and buy-ins, prompt user
+            System.out.println("Player: " + pokerGame.getPlayers().get(i).getName()); //for cash-outs
+            System.out.println("Buy-in: " + pokerGame.getBuyIns().get(i));
+            System.out.print("Please enter cash-out amount for this player (CAD dollars): ");
             int cashOutAmount = Integer.parseInt(input.next());
             pokerGame.addCashOut(cashOutAmount);
         }
@@ -126,6 +133,7 @@ public class PokerGameCollectionApp {
         if (pokerGameCollection.size() == 0) {
             System.out.println("No games in poker collection.");
         } else {
+            System.out.println("Poker games in your collection: ");
             for (PokerGame game : pokerGameCollection) {
                 System.out.println(game.getDate());
             }
@@ -141,6 +149,8 @@ public class PokerGameCollectionApp {
         }
     }
 
+    // REQUIRES: pokerGameCollection.size() > 0
+    // EFFECTS: selects poker game with given date for user to view game options
     private void viewPokerGame() {
         System.out.print("Please enter the date of the game you want to view (dd/MMM/yyyy): ");
         String date = input.next();
@@ -162,6 +172,7 @@ public class PokerGameCollectionApp {
         System.out.println("Returning to main menu.");
     }
 
+    // EFFECTS: displays poker game menu options
     private void selectGameMenu() {
         System.out.println("\nSelect from:");
         System.out.println("\ta -> add player to poker game");
@@ -170,6 +181,7 @@ public class PokerGameCollectionApp {
         System.out.println("\tq -> quit");
     }
 
+    // EFFECTS: processes user input command
     private void processGameMenuCommand(String command, PokerGame pokerGame) {
         if (command.equals("a")) {
             existingGameAddPlayer(pokerGame);
@@ -182,6 +194,8 @@ public class PokerGameCollectionApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds a single player to a poker game along with their buy-in and cash-out values
     private void existingGameAddPlayer(PokerGame pokerGame) {
         displayPlayers(pokerGame);
         System.out.print("Who would you like to add? ");
@@ -199,6 +213,8 @@ public class PokerGameCollectionApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes a single player from given poker game
     private void existingGameRemovePlayer(PokerGame pokerGame) {
         displayPlayers(pokerGame);
         System.out.print("Who would you like to remove? ");
@@ -220,13 +236,20 @@ public class PokerGameCollectionApp {
         }
     }
 
+    // REQUIRES: pokerGame.getPlayers().size() > 0
+    // MODIFIES: this
+    // EFFECTS: prints out player buy-in, cash-out and earnings values
     private void viewPlayersAndStatistics(PokerGame pokerGame) {
         for (int i = 0; i < pokerGame.getPlayers().size(); i++) {
             Player player = pokerGame.getPlayers().get(i);
             int buyIn = pokerGame.getBuyIns().get(i);
             int cashOut = pokerGame.getCashOuts().get(i);
             int earnings = cashOut - buyIn;
-            System.out.printf("Player: %sBuy-in: %dCash-out: %dEarnings: %d%n", player, buyIn, cashOut, earnings);
+            System.out.print("Player: " + player.getName() + " ");
+            System.out.print("Buy-in: " + buyIn + " ");
+            System.out.print("Cash-out: " + cashOut + " ");
+            System.out.print("Earnings: " + earnings + " \n");
+
         }
     }
 
@@ -234,7 +257,7 @@ public class PokerGameCollectionApp {
     // REQUIRES: pokerGameCollection.size() > 0
     // MODIFIES: this
     // EFFECTS: removes game from PokerGameCollection
-    public void removeGame() {
+    private void removeGame() {
         if (pokerGameCollection.size() > 0) {
             System.out.println("Poker games in this collection: ");
             for (PokerGame pokerGame : pokerGameCollection) {
@@ -254,6 +277,8 @@ public class PokerGameCollectionApp {
         }
     }
 
+    // MODIFIES: poker game
+    // EFFECTS: removes all players from poker game
     private void removeAllPlayers(PokerGame pokerGame) {
         for (int i = 0; i < pokerGame.getPlayers().size(); i++) {
             Player player = pokerGame.getPlayers().get(i);
@@ -266,17 +291,19 @@ public class PokerGameCollectionApp {
         }
     }
 
-    public PokerGame getPokerGame(String date) {
+    // EFFECTS: returns poker game with given date
+    private PokerGame getPokerGame(String date) {
         PokerGame pokerGame = null;
         for (PokerGame game : pokerGameCollection) {
-            if (game.getDate() == date) {
-                pokerGame = game;
+            if (game.getDate().equals(date)) {
+                return game;
             }
         }
         return pokerGame;
     }
 
-    public void displayPlayers(PokerGame pokerGame) {
+    // EFFECTS: displays all players in given poker game
+    private void displayPlayers(PokerGame pokerGame) {
         System.out.println("Players in this game: ");
         for (Player player : pokerGame.getPlayers()) {
             System.out.println(player.getName());

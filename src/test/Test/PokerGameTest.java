@@ -40,7 +40,7 @@ class PokerGameTest {
     }
 
     @Test
-    void testRemovePlayer() {
+    void testRemovePlayerCorrectBuyInAndCashOut() {
         testPokerGame.addPlayer(player1);
         testPokerGame.addBuyIn(20);
         testPokerGame.addCashOut(20);
