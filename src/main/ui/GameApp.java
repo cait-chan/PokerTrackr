@@ -2,22 +2,23 @@ package ui;
 
 import model.Player;
 import model.PokerGame;
+import model.PokerGameCollection;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 // Poker game collection application
-public class PokerGameCollectionApp {
-    private List<PokerGame> pokerGameCollection;
+public class GameApp {
+    private PokerGameCollection pokerGameCollection;
     private Scanner input;
 
     // EFFECTS: runs poker game collection application
-    public PokerGameCollectionApp() {
-        runPokerGameCollection();
+    public GameApp() {
+        runPokerGameApp();
     }
 
-    private void runPokerGameCollection() {
+    private void runPokerGameApp() {
         boolean keepRunning = true;
         String command;
 
@@ -54,7 +55,7 @@ public class PokerGameCollectionApp {
     // MODIFIES: this
     // EFFECTS: initializes values
     private void init() {
-        pokerGameCollection = new ArrayList<>();
+        pokerGameCollection = new PokerGameCollection();
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
@@ -76,7 +77,7 @@ public class PokerGameCollectionApp {
         System.out.print("Enter date for poker game (dd/MMM/yyyy): ");
         String date = input.next();
         PokerGame pokerGame = new PokerGame(date);
-        pokerGameCollection.add(pokerGame);
+        pokerGameCollection.addPokerGame(pokerGame);
         newGameAddPlayers(pokerGame);
         if (pokerGame.getPlayers().size() > 0) {
             newGameAddBuyInsAndCashOuts(pokerGame);
@@ -130,11 +131,11 @@ public class PokerGameCollectionApp {
 
     // EFFECTS: displays all the poker games in the collection and allows user to select a game
     public void viewAllPokerGames() {
-        if (pokerGameCollection.size() == 0) {
+        if (pokerGameCollection.getNumPokerGames() == 0) {
             System.out.println("No games in poker collection.");
         } else {
             System.out.println("Poker games in your collection: ");
-            for (PokerGame game : pokerGameCollection) {
+            for (PokerGame game : pokerGameCollection.getPokerGames()) {
                 System.out.println(game.getDate());
             }
             System.out.println("Would you like to view a poker game? (y/n)");
@@ -258,17 +259,17 @@ public class PokerGameCollectionApp {
     // MODIFIES: this
     // EFFECTS: removes game from PokerGameCollection
     private void removeGame() {
-        if (pokerGameCollection.size() > 0) {
+        if (pokerGameCollection.getNumPokerGames() > 0) {
             System.out.println("Poker games in this collection: ");
-            for (PokerGame pokerGame : pokerGameCollection) {
+            for (PokerGame pokerGame : pokerGameCollection.getPokerGames()) {
                 System.out.println(pokerGame.getDate());
             }
             System.out.print("Which game would you like to remove (dd/MMM/yyyy)? ");
             String date = input.next();
             PokerGame pokerGame = getPokerGame(date);
-            if (pokerGameCollection.contains(pokerGame)) {            //if game is in collection
+            if (pokerGameCollection.getPokerGames().contains(pokerGame)) {            //if game is in collection
                 removeAllPlayers(pokerGame);                          //remove players and update fields
-                pokerGameCollection.remove(pokerGame);                //remove poker game from collection
+                pokerGameCollection.removePokerGame(pokerGame);                //remove poker game from collection
             } else {
                 System.out.print("Poker game is not in this poker game collection.");
             }
@@ -294,7 +295,7 @@ public class PokerGameCollectionApp {
     // EFFECTS: returns poker game with given date
     private PokerGame getPokerGame(String date) {
         PokerGame pokerGame = null;
-        for (PokerGame game : pokerGameCollection) {
+        for (PokerGame game : pokerGameCollection.getPokerGames()) {
             if (game.getDate().equals(date)) {
                 return game;
             }
