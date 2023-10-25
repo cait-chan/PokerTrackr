@@ -19,6 +19,8 @@ along with all-of-time statistics to look at how each player has done since they
 - As a user, I want to be able to view the list of poker events in my poker collection
 - As a user, I want to be able to select a poker event from my collection and view list the players that played in that 
 poker event and their associated statistics, including buy-ins, cash-outs, and total earnings
+- As a user, I want to be able to save my poker game collection to file (if I so choose)
+- As a user, I want to be able to load my poker game collection from file (if I so choose)
 
 User stories that will be implemented in the future:
 - As a user, I want to be able to remove a player from an existing poker game
