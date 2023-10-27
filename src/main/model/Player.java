@@ -1,8 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a player having a name, lifetime buy-ins (in CAD dollars), lifetime cash-outs (in CAD dollars),
 // number of games won and lost
-public class Player {
+public class Player implements Writable {
     private String name;
     private int totalBuyIns;
     private int totalCashOuts;
@@ -66,5 +69,16 @@ public class Player {
     // EFFECTS: returns number of games lost for player
     public int getGamesLost() {
         return gamesLost;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("total buy-ins", totalBuyIns);
+        json.put("total cash-outs", totalCashOuts);
+        json.put("games won", gamesWon);
+        json.put("games lost", gamesLost);
+        return json;
     }
 }

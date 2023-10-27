@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PokerGameCollection {
+public class PokerGameCollection implements Writable {
     private List<PokerGame> pokerGameCollection;
 
     // EFFECTS: creates a new poker game collection with an empty list of poker games
@@ -34,5 +38,23 @@ public class PokerGameCollection {
     //EFFECTS: returns the number of poker games in the collection
     public int getNumPokerGames() {
         return pokerGameCollection.size();
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("pokerGames", pokerGamesToJson());
+        return json;
+    }
+
+    //EFFECTS: returns things in this poker game collection as a JSON array
+    private JSONArray pokerGamesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (PokerGame pokerGame : pokerGameCollection) {
+            jsonArray.put(pokerGame.toJson());
+        }
+
+        return jsonArray;
     }
 }

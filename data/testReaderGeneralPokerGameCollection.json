@@ -1,0 +1,58 @@
+{
+  "pokerGames": [
+    {
+      "date": "10/SEP/2023",
+      "players": [
+        {
+          "name": "Chloe",
+          "lifetime buyins": 5,
+          "lifetime cashouts": 10,
+          "games won": 1,
+          "games lost": 0
+        },
+        {
+          "name": "Johnny",
+          "lifetime buyins": 25,
+          "lifetime cashouts": 20,
+          "games won": 0,
+          "games lost": 1
+        }
+      ],
+      "buy-ins": [
+        5,
+        25
+      ],
+      "cash-outs": [
+        10,
+        20
+      ]
+    },
+    {
+      "date": "15/SEP/2023",
+      "players": [
+        {
+          "name": "Caitlyn",
+          "lifetime buyins": 5,
+          "lifetime cashouts": 10,
+          "games won": 1,
+          "games lost": 0
+        },
+        {
+          "name": "Claire",
+          "lifetime buyins": 25,
+          "lifetime cashouts": 20,
+          "games won": 0,
+          "games lost": 1
+        }
+      ],
+      "buy-ins": [
+        5,
+        25
+      ],
+      "cash-outs": [
+        10,
+        20
+      ]
+    }
+  ]
+}

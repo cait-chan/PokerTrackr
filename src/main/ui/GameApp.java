@@ -3,18 +3,25 @@ package ui;
 import model.Player;
 import model.PokerGame;
 import model.PokerGameCollection;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 // Poker game collection application
 public class GameApp {
+    private static final String JSON_STORE = "./data/pokergamecollection.json";
     private PokerGameCollection pokerGameCollection;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs poker game collection application
-    public GameApp() {
+    public GameApp() throws FileNotFoundException {
         runPokerGameApp();
     }
 
@@ -46,6 +53,10 @@ public class GameApp {
             viewAllPokerGames();
         } else if (command.equals("r")) {
             removeGame();
+        } else if (command.equals("s")) {
+            savePokerGameCollection();
+        } else if (command.equals("l")) {
+            loadPokerGameCollection();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -58,6 +69,8 @@ public class GameApp {
         pokerGameCollection = new PokerGameCollection();
         input = new Scanner(System.in);
         input.useDelimiter("\n");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     //EFFECTS: displays menu of options to user
@@ -66,6 +79,8 @@ public class GameApp {
         System.out.println("\tn -> new poker game");
         System.out.println("\tv -> view all poker games");
         System.out.println("\tr -> remove poker game");
+        System.out.println("\ts -> save poker collection to file");
+        System.out.println("\tl -> load poker collection from file");
         System.out.println("\tq -> quit");
     }
 
@@ -171,6 +186,29 @@ public class GameApp {
             }
         }
         System.out.println("Returning to main menu.");
+    }
+
+    //EFFECTS: saves the poker game collection to file
+    private void savePokerGameCollection() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(pokerGameCollection);
+            jsonWriter.close();
+            System.out.println("Saved your poker game collection to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    //MODIFIES: this
+    //EFFECTS: loads poker game collection from file
+    private void loadPokerGameCollection() {
+        try {
+            pokerGameCollection = jsonReader.read();
+            System.out.println("Loaded your poker game collection from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 
     // EFFECTS: displays poker game menu options

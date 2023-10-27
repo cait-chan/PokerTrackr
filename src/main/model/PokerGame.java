@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a poker game with a date, a list of players and their buy-in amounts
-public class PokerGame {
+public class PokerGame implements Writable {
     private final String date;
     private List<Player> players;    //list of players participating in this poker game
     private List<Integer> buyIns;    //list of buy in values which correlate to the same index as players list
@@ -77,5 +81,26 @@ public class PokerGame {
     // EFFECTS: returns date of poker game
     public String getDate() {
         return date;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("date", date);
+        json.put("players", playersToJson());
+        json.put("buy-ins", buyIns);
+        json.put("cash-outs", cashOuts);
+        return json;
+    }
+
+    //EFFECTS: returns players in this poker game as a JSON array
+    private JSONArray playersToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Player player : players) {
+            jsonArray.put(player.toJson());
+        }
+
+        return jsonArray;
     }
 }
