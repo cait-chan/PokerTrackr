@@ -1,0 +1,26 @@
+{"pokerGames": [
+    {
+        "date": "10/SEP/2023",
+        "cash-outs": [50],
+        "players": [{
+            "games lost": 0,
+            "games won": 0,
+            "name": "Johnny",
+            "total cash-outs": 0,
+            "total buy-ins": 0
+        }],
+        "buy-ins": [25]
+    },
+    {
+        "date": "15/SEP/2023",
+        "cash-outs": [1000],
+        "players": [{
+            "games lost": 0,
+            "games won": 0,
+            "name": "Caitlyn",
+            "total cash-outs": 0,
+            "total buy-ins": 0
+        }],
+        "buy-ins": [100]
+    }
+]}
