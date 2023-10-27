@@ -49,4 +49,15 @@ class PokerGameTest {
         assertEquals(0, testPokerGame.getBuyIns().size());
         assertEquals(0, testPokerGame.getCashOuts().size());
     }
+
+    @Test
+    void testRemovePlayerIncorrectBuyInAndCashOut() {
+        testPokerGame.addPlayer(player1);
+        testPokerGame.addBuyIn(20);
+        testPokerGame.addCashOut(20);
+        testPokerGame.removePlayer(player1, 10, 10);
+        assertEquals(0, testPokerGame.getPlayers().size());
+        assertEquals(1, testPokerGame.getBuyIns().size());
+        assertEquals(1, testPokerGame.getCashOuts().size());
+    }
 }
