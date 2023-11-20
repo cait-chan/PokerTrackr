@@ -35,15 +35,15 @@ public class PokerGameCollectionGUI extends JPanel {
         //stub
     }
 
-    private void savePokerGameCollection() {
-        try {
-            jsonWriter.open();
-            //jsonWriter.write(pokerGameCollection);
-            jsonWriter.close();
-            //System.out.println("Saved your poker game collection to " + JSON_STORE);
-        } catch (FileNotFoundException e) {
-            //System.out.println("Unable to write to file: " + JSON_STORE);
-        }
-    }
+//    private void savePokerGameCollection() {
+//        try {
+//            jsonWriter.open();
+//            jsonWriter.write(pokerGameCollection);
+//            jsonWriter.close();
+//            //System.out.println("Saved your poker game collection to " + JSON_STORE);
+//        } catch (FileNotFoundException e) {
+//            //System.out.println("Unable to write to file: " + JSON_STORE);
+//        }
+//    }
 
 }

@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * Represents application's main window frame.
@@ -29,7 +31,7 @@ public class ApplicationGUI extends JFrame {
     /**
      * Constructor sets up main menu.
      */
-    public ApplicationGUI() {
+    public ApplicationGUI() throws FileNotFoundException {
         super("PokerTrackr");
 
         //setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -60,13 +62,11 @@ public class ApplicationGUI extends JFrame {
         headerMessage = new JLabel(welcomeMessage);
         GridBagConstraints constraintsHeaderMessage = new GridBagConstraints();
         constraintsHeaderMessage.anchor = GridBagConstraints.NORTHWEST;
+        startMenuPanel.add(headerMessage, constraintsHeaderMessage);
 
-        ImageIcon gameIcon = new ImageIcon("data/PokerGameIconFinal copy.png");
-        JLabel programImage = new JLabel(gameIcon);
+        JLabel programImage = new JLabel(new ImageIcon("data/PokerGameIconFinal copy.png"));
         GridBagConstraints constraintsIcon = new GridBagConstraints();
         constraintsIcon.anchor = GridBagConstraints.NORTHEAST;
-
-        startMenuPanel.add(headerMessage, constraintsHeaderMessage);
         startMenuPanel.add(programImage, constraintsIcon);
 
         //create and add buttons to startMenuPanel
@@ -75,7 +75,6 @@ public class ApplicationGUI extends JFrame {
         createViewSelectedPokerGameButton(startMenuPanel);
         createSavePokerCollectionButton(startMenuPanel);
         createLoadPokerCollectionButton(startMenuPanel);
-
 
         //creates and adds empty poker game list to startMenuPanel
         createEmptyPokerGameList(startMenuPanel);
@@ -123,7 +122,14 @@ public class ApplicationGUI extends JFrame {
         savePokerCollection.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //stub
+                try {
+                    jsonWriter.open();
+                    jsonWriter.write(pokerGameCollection);
+                    jsonWriter.close();
+                    headerMessage.setText("Poker Collection was saved.");
+                } catch (FileNotFoundException ex) {
+                    headerMessage.setText("Unable to save Poker Collection");
+                }
             }
         });
         panel.add(savePokerCollection, constraintsSavePokerCollection);
@@ -135,7 +141,12 @@ public class ApplicationGUI extends JFrame {
         loadPokerCollection.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //stub
+                try {
+                    pokerGameCollection = jsonReader.read();
+                    headerMessage.setText("Poker Collection was loaded.");
+                } catch (IOException ex) {
+                    headerMessage.setText("Unable to load Poker Collection.");
+                }
             }
         });
         panel.add(loadPokerCollection, constraintsLoadPokerCollection);
@@ -176,16 +187,15 @@ public class ApplicationGUI extends JFrame {
         startMenuPanel.add(wrapperPanel, wrapperPanelConstraints);
     }
 
-    // Create the poker game collection and poker game collection menu GUI
-    private void createPokerGameCollectionMenu() {
-        headerMessage.setText("Caitlyn's Poker Game Collection");
-        pokerGameCollection = new PokerGameCollection();
-        pokerGameCollectionArea = new PokerGameCollectionGUI(this);
-        add(pokerGameCollectionArea, BorderLayout.CENTER);
-    }
-
     // starts the application
     public static void main(String[] args) {
-        new ApplicationGUI();
+        try {
+            new ApplicationGUI();
+        } catch (FileNotFoundException e) {
+            //if app not found, create JFrame with JLabel with error message
+            JFrame noFileException = new JFrame();
+            JLabel errorMessage = new JLabel("Unable to run application: file not found");
+            noFileException.add(errorMessage);
+        }
     }
 }
