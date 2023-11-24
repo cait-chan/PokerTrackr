@@ -59,7 +59,7 @@ public class PokerGameGUI extends JOptionPane {
 //            int buyInAmount = Integer.parseInt(input.next());
 //            pokerGame.addBuyIn(buyInAmount);
 //        }
-//        for (int i = 0; i < pokerGame.getPlayers().size(); i++) {                //list players and buy-ins, prompt user
+//        for (int i = 0; i < pokerGame.getPlayers().size(); i++) {            //list players and buy-ins, prompt user
 //            System.out.println("Player: " + pokerGame.getPlayers().get(i).getName()); //for cash-outs
 //            System.out.println("Buy-in: " + pokerGame.getBuyIns().get(i));
 //            System.out.print("Please enter cash-out amount for this player (CAD dollars): ");
