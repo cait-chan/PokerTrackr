@@ -1,3 +1,5 @@
+//Citation: from workroom example application
+
 package persistence;
 
 import model.Player;

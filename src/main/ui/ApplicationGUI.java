@@ -1,5 +1,6 @@
 package ui;
 
+import model.PokerGame;
 import model.PokerGameCollection;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -11,9 +12,7 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-/**
- * Represents application's main window frame.
- */
+//Represents application's main window frame.
 public class ApplicationGUI extends JFrame {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
@@ -22,15 +21,17 @@ public class ApplicationGUI extends JFrame {
     private PokerGameCollectionGUI pokerGameCollectionArea;
     private JPanel startMenuPanel;
     private JLabel headerMessage;
-    private static final int LIST_ROW_COUNT = 30;
-    private JList<String> list1 = new JList<>();
+    private static final int LIST_ROW_COUNT = 10;
+    private DefaultListModel<String> pokerGameListModel;
+    private JList<String> pokerGameJList;
+    private JPanel wrapperPanel;
     private static final String JSON_STORE = "./data/pokergamecollection.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-    /**
-     * Constructor sets up main menu.
-     */
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS: sets up application
     public ApplicationGUI() throws FileNotFoundException {
         super("PokerTrackr");
 
@@ -53,7 +54,9 @@ public class ApplicationGUI extends JFrame {
         jsonReader = new JsonReader(JSON_STORE);
     }
 
-    //Create the starting menu GUI
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS: Creates the starting menu GUI
     private void createStartingMenu() {
         startMenuPanel = new JPanel();
         startMenuPanel.setLayout(new GridBagLayout());
@@ -77,33 +80,45 @@ public class ApplicationGUI extends JFrame {
         createLoadPokerCollectionButton(startMenuPanel);
 
         //creates and adds empty poker game list to startMenuPanel
-        createEmptyPokerGameList(startMenuPanel);
+        createPokerGameList(startMenuPanel);
     }
 
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS:
     private void createNewPokerGameButton(JPanel panel) {
         JButton addNewPokerGame = new JButton("Add New Poker Game");
         GridBagConstraints constraintsAddNewPokerGame = makeButtonConstraints(2);
         addNewPokerGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //stub
+                if (e.getSource() == addNewPokerGame) {
+                    newPokerGameGUI();
+                }
             }
         });
         panel.add(addNewPokerGame, constraintsAddNewPokerGame);
     }
 
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS: makes remove poker game button to remove selected game from poker game list
     private void createRemovePokerGameButton(JPanel panel) {
         JButton removePokerGame = new JButton("Remove Poker Game");
         GridBagConstraints constraintsRemovePokerGame = makeButtonConstraints(3);
         removePokerGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //stub
+                int index = pokerGameJList.getSelectedIndex();
+                pokerGameListModel.remove(index);
             }
         });
         panel.add(removePokerGame, constraintsRemovePokerGame);
     }
 
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS:
     private void createViewSelectedPokerGameButton(JPanel panel) {
         JButton viewSelectedPokerGame = new JButton("View Selected Poker Game");
         GridBagConstraints constraintsViewPokerGame = makeButtonConstraints(4);
@@ -116,6 +131,7 @@ public class ApplicationGUI extends JFrame {
         panel.add(viewSelectedPokerGame, constraintsViewPokerGame);
     }
 
+    // EFFECTS: makes save poker collection button to save data
     private void createSavePokerCollectionButton(JPanel panel) {
         JButton savePokerCollection = new JButton("Save Poker Collection");
         GridBagConstraints constraintsSavePokerCollection = makeButtonConstraints(5);
@@ -135,6 +151,7 @@ public class ApplicationGUI extends JFrame {
         panel.add(savePokerCollection, constraintsSavePokerCollection);
     }
 
+    // EFFECTS: makes load poker collection button to load data
     private void createLoadPokerCollectionButton(JPanel panel) {
         JButton loadPokerCollection = new JButton("Load Poker Collection");
         GridBagConstraints constraintsLoadPokerCollection =  makeButtonConstraints(6);
@@ -143,6 +160,8 @@ public class ApplicationGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     pokerGameCollection = jsonReader.read();
+                    panel.remove(wrapperPanel);
+                    createPokerGameList(panel);
                     headerMessage.setText("Poker Collection was loaded.");
                 } catch (IOException ex) {
                     headerMessage.setText("Unable to load Poker Collection.");
@@ -153,6 +172,7 @@ public class ApplicationGUI extends JFrame {
     }
 
 
+    // EFFECTS: standardizes button constraints
     private GridBagConstraints makeButtonConstraints(int rowNumber) {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -162,23 +182,26 @@ public class ApplicationGUI extends JFrame {
         return constraints;
     }
 
-    private void createEmptyPokerGameList(JPanel startMenuPanel) {
-        JList<String> pokerGameJList = new JList<>();
+    // EFFECTS: creates poker game list on left side of menu
+    private void createPokerGameList(JPanel startMenuPanel) {
+        pokerGameListModel = new DefaultListModel();
+        for (PokerGame pokerGame : pokerGameCollection.getPokerGames()) {
+            pokerGameListModel.addElement(pokerGame.getDate());
+        }
+
+        pokerGameJList = new JList<>(pokerGameListModel);
         pokerGameJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         pokerGameJList.setLayoutOrientation(JList.VERTICAL);
         pokerGameJList.setVisibleRowCount(LIST_ROW_COUNT);
         pokerGameJList.setPrototypeCellValue("00/AAA/0000");
         GridBagConstraints listConstraints = new GridBagConstraints();
-        listConstraints.anchor = GridBagConstraints.LINE_START;
 
         JScrollPane scrollPane = new JScrollPane(pokerGameJList);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setPreferredSize(new Dimension(250, 80));
+        scrollPane.setPreferredSize(new Dimension(250, 120));
         startMenuPanel.add(scrollPane, listConstraints);
 
-        setLayout(new GridLayout(1, 2));
-
-        JPanel wrapperPanel = new JPanel(new BorderLayout());
+        wrapperPanel = new JPanel(new BorderLayout());
         wrapperPanel.add(scrollPane);
         wrapperPanel.setBorder(BorderFactory.createTitledBorder("Poker Games:"));
         GridBagConstraints wrapperPanelConstraints = new GridBagConstraints();
@@ -187,7 +210,25 @@ public class ApplicationGUI extends JFrame {
         startMenuPanel.add(wrapperPanel, wrapperPanelConstraints);
     }
 
-    // starts the application
+    // EFFECTS: makes new poker game input area
+    private void newPokerGameGUI() {
+        new PokerGameGUI(this);
+        //revalidate();
+        repaint();
+    }
+
+    // EFFECTS: gets pokerGameCollection
+    public PokerGameCollection getPokerGameCollection() {
+        return pokerGameCollection;
+    }
+
+    // EFFECTS: gets pokerGameListModel
+    public DefaultListModel<String> getPokerGameListModel() {
+        return pokerGameListModel;
+    }
+
+
+    // EFFECTS: starts the application
     public static void main(String[] args) {
         try {
             new ApplicationGUI();
