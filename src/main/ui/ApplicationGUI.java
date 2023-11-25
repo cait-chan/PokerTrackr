@@ -14,8 +14,6 @@ import java.io.IOException;
 
 //Represents application's main window frame.
 public class ApplicationGUI extends JFrame {
-    private static final int WIDTH = 800;
-    private static final int HEIGHT = 600;
     private static final String welcomeMessage = "Welcome to PokerTrackr!";
     private PokerGameCollection pokerGameCollection;
     private PokerGameCollectionGUI pokerGameCollectionArea;
@@ -83,9 +81,7 @@ public class ApplicationGUI extends JFrame {
         createPokerGameList(startMenuPanel);
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+    // EFFECTS: makes new poker game button to add a new poker game to collection
     private void createNewPokerGameButton(JPanel panel) {
         JButton addNewPokerGame = new JButton("Add New Poker Game");
         GridBagConstraints constraintsAddNewPokerGame = makeButtonConstraints(2);
@@ -100,8 +96,6 @@ public class ApplicationGUI extends JFrame {
         panel.add(addNewPokerGame, constraintsAddNewPokerGame);
     }
 
-    // REQUIRES:
-    // MODIFIES:
     // EFFECTS: makes remove poker game button to remove selected game from poker game list
     private void createRemovePokerGameButton(JPanel panel) {
         JButton removePokerGame = new JButton("Remove Poker Game");
@@ -116,9 +110,8 @@ public class ApplicationGUI extends JFrame {
         panel.add(removePokerGame, constraintsRemovePokerGame);
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
+
+    // EFFECTS: makes view selected poker game button to view details of selected game from list
     private void createViewSelectedPokerGameButton(JPanel panel) {
         JButton viewSelectedPokerGame = new JButton("View Selected Poker Game");
         GridBagConstraints constraintsViewPokerGame = makeButtonConstraints(4);
