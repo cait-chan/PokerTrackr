@@ -40,17 +40,6 @@ public class PokerGameCollection implements Writable {
         return pokerGameCollection.size();
     }
 
-    //EFFECTS: returns true if poker game collection contains game of interest, false otherwise
-    public boolean containsPokerGame(String date) {
-        boolean answer = false;
-        for (PokerGame pokerGame : pokerGameCollection) {
-            if (pokerGame.getDate().equals(date)) {
-                answer = true;
-            }
-        }
-        return answer;
-    }
-
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
