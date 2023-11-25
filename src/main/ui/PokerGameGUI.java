@@ -154,8 +154,6 @@ public class PokerGameGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: adds players to new poker game
     private void addPlayers(PokerGame pokerGame) {
-        boolean addingPlayers = true;
-
         JTextField nameField = new JTextField(5);
         JTextField buyInField = new JTextField(5);
         JTextField cashOutField = new JTextField(5);
@@ -172,19 +170,18 @@ public class PokerGameGUI extends JFrame {
                 "Please enter player details", JOptionPane.OK_CANCEL_OPTION);
 
         if (result == JOptionPane.OK_OPTION) {
-            String name = nameField.getText();
             int buyIn = Integer.valueOf(buyInField.getText());
             int cashOut = Integer.valueOf(cashOutField.getText());
 
-            Player player = new Player(name);
+            Player player = new Player(nameField.getText());
             player.increaseTotalBuyIns(buyIn);
             player.increaseTotalCashOuts(cashOut);
 
-            pokerGame.addPlayer(new Player(nameField.getText()));
+            pokerGame.addPlayer(player);
             pokerGame.addBuyIn(buyIn);
             pokerGame.addCashOut(cashOut);
 
-            playerListModel.addElement(name);
+            playerListModel.addElement(nameField.getText());
         }
     }
 }
