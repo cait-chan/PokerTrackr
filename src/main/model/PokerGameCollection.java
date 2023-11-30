@@ -21,6 +21,8 @@ public class PokerGameCollection implements Writable {
     //EFFECTS: adds the poker game to the collection
     public void addPokerGame(PokerGame pokerGame) {
         pokerGameCollection.add(pokerGame);
+        EventLog.getInstance().logEvent(new Event(pokerGame.getDate()
+                + " poker game added to poker game collection"));
     }
 
     //REQUIRES: poker game must already be in collection
@@ -28,6 +30,8 @@ public class PokerGameCollection implements Writable {
     //EFFECTS: removes poker game from the collection
     public void removePokerGame(PokerGame pokerGame) {
         pokerGameCollection.remove(pokerGame);
+        EventLog.getInstance().logEvent(new Event(pokerGame.getDate()
+                + " poker game removed from poker game collection"));
     }
 
     //EFFECTS: returns an unmodifiable list of poker games in this collection

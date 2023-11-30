@@ -26,24 +26,28 @@ public class Player implements Writable {
     // EFFECTS: adds amount to totalBuyIns for player
     public void increaseTotalBuyIns(int amount) {
         totalBuyIns += amount;
+        EventLog.getInstance().logEvent(new Event(amount + " added to totalBuyIns for " + getName()));
     }
 
     // REQUIRES: amount >= 0
     // EFFECTS: adds amount to totalCashOuts for player
     public void increaseTotalCashOuts(int amount) {
         totalCashOuts += amount;
+        EventLog.getInstance().logEvent(new Event(amount + " added to totalCashOuts for " + getName()));
     }
 
     // REQUIRES: amount >= 0
     // EFFECTS: subtracts amount to totalBuyIns for player
     public void decreaseTotalBuyIns(int amount) {
-        totalBuyIns += amount;
+        totalBuyIns -= amount;
+        EventLog.getInstance().logEvent(new Event(amount + " subtracted from totalBuyIns for " + getName()));
     }
 
     // REQUIRES: amount >= 0
     // EFFECTS: subtracts amount to totalCashOuts for player
     public void decreaseTotalCashOuts(int amount) {
-        totalCashOuts += amount;
+        totalCashOuts -= amount;
+        EventLog.getInstance().logEvent(new Event(amount + " subtracted from totalCashOuts for " + getName()));
     }
 
     // EFFECTS: returns player name

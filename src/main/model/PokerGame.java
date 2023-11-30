@@ -28,6 +28,8 @@ public class PokerGame implements Writable {
     // EFFECTS: adds given player to the list of players
     public void addPlayer(Player player) {
         this.players.add(player);
+        EventLog.getInstance().logEvent(new Event(player.getName() + " added to "
+                + getDate() + "poker game."));
     }
 
     // REQUIRES:
@@ -47,6 +49,8 @@ public class PokerGame implements Writable {
                 this.cashOuts.remove(getCashOuts().get(i));
             }
         }
+        EventLog.getInstance().logEvent(new Event(player.getName() + " removed from "
+                + getDate() + "poker game."));
     }
 
     // REQUIRES: amount >= 0
@@ -54,6 +58,8 @@ public class PokerGame implements Writable {
     // EFFECTS: adds buy-in amount to buyIns list
     public void addBuyIn(int amount) {
         buyIns.add(amount);
+        EventLog.getInstance().logEvent(new Event(amount + " added to buyIns for "
+                + getDate() + "poker game."));
     }
 
     // REQUIRES: amount >= 0
@@ -61,6 +67,8 @@ public class PokerGame implements Writable {
     // EFFECTS: adds cash-out amount to cashOuts list
     public void addCashOut(int amount) {
         cashOuts.add(amount);
+        EventLog.getInstance().logEvent(new Event(amount + " added to cashOuts for "
+                + getDate() + "poker game."));
     }
 
     // EFFECTS: returns list of players in game
