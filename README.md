@@ -39,19 +39,19 @@ User stories that will be implemented in the future:
 
 ## Phase 4: Task 2
 Fri Dec 01 03:07:13 PST 2023
-10/SEP/2023 poker game added to poker game collection
+10/SEP/2023 poker game added to poker game collection  
 Fri Dec 01 03:07:24 PST 2023
-10 added to totalBuyIns for Johnny
+10 added to totalBuyIns for Johnny  
 Fri Dec 01 03:07:24 PST 2023
-10 added to totalCashOuts for Johnny
+10 added to totalCashOuts for Johnny  
 Fri Dec 01 03:07:24 PST 2023
-Johnny added to 10/SEP/2023 poker game.
+Johnny added to 10/SEP/2023 poker game  
 Fri Dec 01 03:07:24 PST 2023
-10 added to buyIns for 10/SEP/2023poker game.
+10 added to buyIns for 10/SEP/2023 poker game  
 Fri Dec 01 03:07:24 PST 2023
-10 added to cashOuts for 10/SEP/2023poker game.
+10 added to cashOuts for 10/SEP/2023 poker game  
 Fri Dec 01 03:16:39 PST 2023
-10/SEP/2023 poker game removed from poker game collection
+10/SEP/2023 poker game removed from poker game collection  
 
 ## Phase 4: Task 3
 If I had more time to work on this project, I would refactor many of the methods in the Player and PokerGame classes so 
