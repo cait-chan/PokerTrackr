@@ -4,7 +4,7 @@
 
 My boyfriend and I host weekly poker nights with our friends and have been using the Notes app on our phones
 to keep track of buy-ins and winnings at the end of the night. With every new game this can get tedious to set
-up so I want to design a project that we can use moving forward to keep track of all of our poker games and that
+up, so I want to design a project that we can use moving forward to keep track of all of our poker games and that
 is easy for us to set up each time we play again. The application will allow us to create a new poker event and
 add the players (want to be able to have a dropdown menu of all previous players if possible, but also be able
 to add a new player if needed), the total dollar amount of buy-ins for each player (this should update the total
@@ -54,3 +54,11 @@ Fri Dec 01 03:16:39 PST 2023
 10/SEP/2023 poker game removed from poker game collection
 
 ## Phase 4: Task 3
+If I had more time to work on this project, I would refactor many of the methods in the Player and PokerGame classes so 
+that they utilize an abstract method since there is a good amount of code duplication. I would also refactor the 
+creation of a new poker game within the PokerGameGUI class since I now dislike the use of the JOptionPane in prompting 
+the user for the date. Instead, I would want to have a single new JFrame open that the user could input the date and an 
+initial player with their buy-in and cash-out values, with functionality to then add more "add player" JTextFields if 
+the user wished to do so. I would also split up some of the longer methods so that they have helper functions to do a 
+specific part (eg. in the ApplicationGUI constructor I would make a call to createButtons() which would be a helper 
+function that creates each button, rather than keeping each call to make a button in the constructor).

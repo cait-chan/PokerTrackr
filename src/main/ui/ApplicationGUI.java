@@ -17,7 +17,6 @@ import java.io.IOException;
 public class ApplicationGUI extends JFrame {
     private static final String welcomeMessage = "Welcome to PokerTrackr!";
     private PokerGameCollection pokerGameCollection;
-    private PokerGameCollectionGUI pokerGameCollectionArea;
     private JPanel startMenuPanel;
     private JLabel headerMessage;
     private static final int LIST_ROW_COUNT = 10;

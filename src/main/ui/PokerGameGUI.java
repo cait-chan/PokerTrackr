@@ -7,12 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 //Represents visual user interface for Poker Game menu.
 public class PokerGameGUI extends JFrame {
-    private ApplicationGUI applicationGUI;
     private PokerGame pokerGame;
     private JPanel pokerGamePanel;
     private DefaultListModel<String> playerListModel;
