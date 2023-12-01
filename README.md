@@ -36,3 +36,21 @@ User stories that will be implemented in the future:
 - You can locate my visual component by running the application, there is an image of cards in the top right corner
 - You can save the state of my application by clicking the button labelled "Save Poker Collection"
 - You can reload the state of my application by clicking the button labelled "Load Poker Collection"
+
+## Phase 4: Task 2
+Fri Dec 01 03:07:13 PST 2023
+10/SEP/2023 poker game added to poker game collection
+Fri Dec 01 03:07:24 PST 2023
+10 added to totalBuyIns for Johnny
+Fri Dec 01 03:07:24 PST 2023
+10 added to totalCashOuts for Johnny
+Fri Dec 01 03:07:24 PST 2023
+Johnny added to 10/SEP/2023 poker game.
+Fri Dec 01 03:07:24 PST 2023
+10 added to buyIns for 10/SEP/2023poker game.
+Fri Dec 01 03:07:24 PST 2023
+10 added to cashOuts for 10/SEP/2023poker game.
+Fri Dec 01 03:16:39 PST 2023
+10/SEP/2023 poker game removed from poker game collection
+
+## Phase 4: Task 3

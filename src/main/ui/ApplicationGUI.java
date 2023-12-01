@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.PokerGame;
 import model.PokerGameCollection;
 import persistence.JsonReader;
@@ -7,8 +9,7 @@ import persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -40,7 +41,17 @@ public class ApplicationGUI extends JFrame {
 
         pack();
         setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                for (Event event : EventLog.getInstance()) {
+                    System.out.println(event.toString());
+                }
+                System.exit(0);
+            }
+        });
     }
 
     // REQUIRES:
@@ -105,6 +116,7 @@ public class ApplicationGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 int index = pokerGameJList.getSelectedIndex();
                 pokerGameListModel.remove(index);
+                pokerGameCollection.removePokerGame(pokerGameCollection.getPokerGames().get(index));
             }
         });
         panel.add(removePokerGame, constraintsRemovePokerGame);
