@@ -28,7 +28,7 @@ User stories that will be implemented in the future:
 - As a user, I want to be able to select a poker event from my collection and view list the players that played in that
   poker event and their associated statistics, including buy-ins, cash-outs, and total earnings
 
-## Instructions for Grader:
+## Instructions to Run:
 - You can generate the first required action related to adding Xs to a Y by clicking the button labelled
     "New Poker Game" to add a new poker game to the poker game collection
 - You can generate the second required action related to adding Xs to a Y by selecting a poker game from the list on 
@@ -37,23 +37,8 @@ User stories that will be implemented in the future:
 - You can save the state of my application by clicking the button labelled "Save Poker Collection"
 - You can reload the state of my application by clicking the button labelled "Load Poker Collection"
 
-## Phase 4: Task 2
-Fri Dec 01 03:07:13 PST 2023
-10/SEP/2023 poker game added to poker game collection  
-Fri Dec 01 03:07:24 PST 2023
-10 added to totalBuyIns for Johnny  
-Fri Dec 01 03:07:24 PST 2023
-10 added to totalCashOuts for Johnny  
-Fri Dec 01 03:07:24 PST 2023
-Johnny added to 10/SEP/2023 poker game  
-Fri Dec 01 03:07:24 PST 2023
-10 added to buyIns for 10/SEP/2023 poker game  
-Fri Dec 01 03:07:24 PST 2023
-10 added to cashOuts for 10/SEP/2023 poker game  
-Fri Dec 01 03:16:39 PST 2023
-10/SEP/2023 poker game removed from poker game collection  
 
-## Phase 4: Task 3
+## Reflection and Future Implementations:
 If I had more time to work on this project, I would refactor many of the methods in the Player and PokerGame classes so 
 that they utilize an abstract method since there is a good amount of code duplication. I would also refactor the 
 creation of a new poker game within the PokerGameGUI class since I now dislike the use of the JOptionPane in prompting 
